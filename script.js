@@ -1,5 +1,7 @@
-let humanScore
-let computerScore;
+let humanScore = 0;
+let computerScore = 0;
+let gameCount = 0;
+let gameFinished;
 
 const getHumanInput = function(){
     const humanInput = parseInt(prompt("1=Rock | 2=Paper | 3=Scissors"));
@@ -21,31 +23,67 @@ const playRound = function(){
     let computerChoice = getComputerInput();
 
     if(humanChoice == computerChoice){
-        console.warn("TIEEEE!!");
+        console.log("TIEEEE!!");
+        gameCount++;
     } //Human Condition
     else if(humanChoice == 1 && computerChoice == 3){
-        console.warn("Human is Winner!");
+        console.log("Human is Winner!");
+        humanScore++;
+        gameCount++;
     }
     else if(humanChoice == 2 && computerChoice == 1){
-        console.warn("Human Winner!!");
+        console.log("Human Winner!!");
         humanScore++;
+        gameCount++;
     }
     else if(humanChoice == 3 && computerChoice == 2){
-        console.warn("Human Winner!!");
+        console.log("Human Winner!!");
         humanScore++;
+        gameCount++;
     } //Computer Condition
     else if(humanChoice == 2 && computerChoice == 3){
-        console.warn("Computer Winner!!");
+        console.log("Computer Winner!!");
         computerScore++;
+        gameCount++;
     }
     else if(humanChoice == 3 && computerChoice == 1){
-        console.warn("Computer Winner!!");
+        console.log("Computer Winner!!");
         computerScore++;
+        gameCount++;
     }
     else if(humanChoice == 1 && computerChoice == 2){
-        console.warn("Computer Winner!!");
+        console.log("Computer Winner!!");
         computerScore++;
+        gameCount++;
     }
+
+    if(humanScore == 5 && computerScore == 5){
+        gameFinished = true;
+    }
+
+    console.log("Human Score: " + humanScore);
+    console.log("Computer Score: " + computerScore);
+    console.log("Game Counts: " + gameCount)
 }
 
-playRound();
+
+
+function playGame(){
+    
+
+
+    do{
+        playRound();
+    }while(gameFinished==true);
+
+
+    // if(humanScore == 5){
+    //     console.log("HUMAAAAAAAAAN IS WINNER!!!!!!");
+    // }
+    // else if(humanScore == 5){
+    //     console.log("COMPUTERRRRRRRRRR IS WINNER!!!!!!");
+    // }
+    
+}
+
+playGame();
