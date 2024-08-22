@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+.main-container{
+    border: 1px solid black;
+    padding: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.child-container{
+    border: 1px solid lightcoral;
+    padding: 8px;
+}
+.all-btn{
+    padding: 8px;
+    text-align: center;
+}
+/* Style for all-btn buton */
+.all-btn button{
+    margin: 8px;
+    background-color: red;
+    font-weight: 800;
+}
+#rps-title{
+
+}
+
+#start-btn{
+    text-align: center;
+}

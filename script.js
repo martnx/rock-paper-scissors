@@ -3,87 +3,105 @@ let computerScore = 0;
 let gameCount = 0;
 let gameFinished;
 
-const getHumanInput = function(){
-    const humanInput = parseInt(prompt("1=Rock | 2=Paper | 3=Scissors"));
-    if(humanInput > 3){
-        console.clear;
-        console.warn("Enter 1-3 Only!");
-        getHumanInput();
-    }
-    return humanInput;
-}
+let humanInput;
 
+let winnerText;
+
+//button DOM
+// const rockBtn = document.querySelector('#rock-btn').addEventListener('click', () =>{
+//     console.log("Rock button");
+// });
+// const paperBtn = document.querySelector('#paper-btn').addEventListener('click', () =>{
+//     console.log("Paper button");
+// });
+// const scissorBtn = document.querySelector('#scissor-btn').addEventListener('click', () =>{
+//     console.log("Scissor Button");
+// });
+
+//Get the computer input using Math random
 const getComputerInput = function(){
     const computerInput = Math.floor(Math.random()*3)+1;
     return computerInput;
 }
 
+const allBtn = document.querySelector(".all-btn");
+    allBtn.addEventListener("click", (e) =>{
+    let target = e.target
+    switch(target.id){
+        case "rock-btn": {
+            humanInput = 1;
+        }; break;
+        case "paper-btn": {
+            humanInput = 2;
+        }; break;
+        case "scissor-btn": {
+            humanInput = 3;
+        }; break;
+    }
+});
+
+//Make the submit button here.
+const startBtn = document.querySelector("#start-btn").addEventListener("click", () =>{
+    console.log(`Human input: ${humanInput}`);
+    playRound();
+});
+
 const playRound = function(){
-    let humanChoice = getHumanInput();
+    let humanChoice = humanInput;
     let computerChoice = getComputerInput();
 
+
     if(humanChoice == computerChoice){
-        console.log("TIEEEE!!");
         gameCount++;
+        winnerText = "TIE!!"
     } //Human Condition
     else if(humanChoice == 1 && computerChoice == 3){
-        console.log("Human is Winner!");
         humanScore++;
         gameCount++;
+        winnerText = "Human Winner";
     }
     else if(humanChoice == 2 && computerChoice == 1){
-        console.log("Human Winner!!");
         humanScore++;
         gameCount++;
+        winnerText = "Human Winner";
     }
     else if(humanChoice == 3 && computerChoice == 2){
-        console.log("Human Winner!!");
         humanScore++;
         gameCount++;
+        winnerText = "Computer Winner";
     } //Computer Condition
     else if(humanChoice == 2 && computerChoice == 3){
-        console.log("Computer Winner!!");
         computerScore++;
         gameCount++;
+        winnerText = "Computer Winner";
     }
     else if(humanChoice == 3 && computerChoice == 1){
-        console.log("Computer Winner!!");
         computerScore++;
         gameCount++;
+        winnerText = "Computer Winner";
     }
     else if(humanChoice == 1 && computerChoice == 2){
-        console.log("Computer Winner!!");
         computerScore++;
         gameCount++;
-    }
-
-    if(humanScore == 5 && computerScore == 5){
-        gameFinished = true;
+        winnerText = "Computer Winner";
     }
 
     console.log("Human Score: " + humanScore);
     console.log("Computer Score: " + computerScore);
     console.log("Game Counts: " + gameCount)
+
+    //Paragraph DOM text
+    const winnerTxtDOM = document.querySelector('#winnerTxtDOM');
+    const gameCountDOM = document.querySelector('#gameCountDOM');
+    const humanScoreDOM = document.querySelector('#humanScoreDOM');
+    const computerScoreDOM = document.querySelector('#computerScoreDOM');
+    //Winner text
+    winnerTxtDOM.textContent = `Winner: ${winnerText}`;
+    gameCountDOM.textContent = `Game Count: ${gameCount}`;
+    humanScoreDOM.textContent = `Winner: ${humanScore}`;
+    computerScoreDOM.textContent = `Winner: ${computerScore}`;
+
 }
 
-
-
-function playGame(){
-    
-
-
-    do{
-        playRound();
-    }while(gameFinished==true);
-
-
-    // if(humanScore == 5){
-    //     console.log("HUMAAAAAAAAAN IS WINNER!!!!!!");
-    // }
-    // else if(humanScore == 5){
-    //     console.log("COMPUTERRRRRRRRRR IS WINNER!!!!!!");
-    // }
-    
-}
-
-playGame();
+//Display dom paragraph here
+//Text Dom
