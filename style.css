@@ -7,13 +7,19 @@
     border: 1px solid black;
     padding: 16px;
 
+    margin: auto;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .child-container{
-    border: 1px solid lightcoral;
+    border: 8px solid black;
     padding: 8px;
+    border-radius: 8px;
+
+    height: 300px;
+    width: 400px;
 }
 .all-btn{
     padding: 8px;
@@ -22,8 +28,14 @@
 /* Style for all-btn buton */
 .all-btn button{
     margin: 8px;
-    background-color: red;
+    background-color: lightblue;
     font-weight: 800;
+    width: 100px;
+    height: 32px;
+    border-radius: 16px;
+}
+.all-btn button:hover{
+    background-color: lightcoral;
 }
 #rps-title{
 
