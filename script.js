@@ -104,12 +104,16 @@ function checkFinished(){
     if(humanScore == 5){
         headerTxTDOM.textContent = "Human Winner";
         allBtn.disabled = true;
+        alert("Human is Winner");
         resetButton();
+        
     }
     if(computerScore == 5){
         headerTxTDOM.textContent = "Computer Winner"
         allBtn.disabled = true;
+        alert("Computer is Winner");
         resetButton();
+        
     }
 }
 
