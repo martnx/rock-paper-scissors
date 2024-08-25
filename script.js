@@ -7,6 +7,15 @@ let humanInput;
 
 let winnerText;
 
+const mainContainer = document.querySelector('.main-container');
+
+//Paragraph DOM text
+const headerTxTDOM = document.querySelector('#rps-title');
+const winnerTxtDOM = document.querySelector('#winnerTxtDOM');
+const gameCountDOM = document.querySelector('#gameCountDOM');
+const humanScoreDOM = document.querySelector('#humanScoreDOM');
+const computerScoreDOM = document.querySelector('#computerScoreDOM');
+
 //button DOM
 // const rockBtn = document.querySelector('#rock-btn').addEventListener('click', () =>{
 //     console.log("Rock button");
@@ -18,90 +27,122 @@ let winnerText;
 //     console.log("Scissor Button");
 // });
 
-//Get the computer input using Math random
-const getComputerInput = function(){
-    const computerInput = Math.floor(Math.random()*3)+1;
-    return computerInput;
-}
-
 const allBtn = document.querySelector(".all-btn");
     allBtn.addEventListener("click", (e) =>{
     let target = e.target
     switch(target.id){
         case "rock-btn": {
-            humanInput = 1;
+            humanInput = 'rock'; 
         }; break;
         case "paper-btn": {
-            humanInput = 2;
+            humanInput = 'paper'; 
         }; break;
         case "scissor-btn": {
-            humanInput = 3;
+            humanInput = 'scissor'; 
         }; break;
     }
-});
-
-//Make the submit button here.
-const startBtn = document.querySelector("#start-btn").addEventListener("click", () =>{
-    console.log(`Human input: ${humanInput}`);
     playRound();
 });
+
+//Get the computer input using Math random
+const getComputerInput = function(){
+    const computerInput = Math.floor(Math.random()*3)+1;
+    let inputReturn
+    
+    switch(computerInput){
+        case 1: inputReturn = 'rock'; break;
+        case 2: inputReturn = 'paper'; break;
+        case 3: inputReturn = 'scissor'; break;
+    };
+    return inputReturn;
+}
 
 const playRound = function(){
     let humanChoice = humanInput;
     let computerChoice = getComputerInput();
 
-
     if(humanChoice == computerChoice){
-        gameCount++;
         winnerText = "TIE!!"
     } //Human Condition
-    else if(humanChoice == 1 && computerChoice == 3){
+    else if(humanChoice == 'rock' && computerChoice == 'scissor'){
         humanScore++;
-        gameCount++;
         winnerText = "Human Winner";
     }
-    else if(humanChoice == 2 && computerChoice == 1){
+    else if(humanChoice == 'paper' && computerChoice == 'rock'){
         humanScore++;
-        gameCount++;
         winnerText = "Human Winner";
     }
-    else if(humanChoice == 3 && computerChoice == 2){
+    else if(humanChoice == 'scissor' && computerChoice == 'paper'){
         humanScore++;
-        gameCount++;
         winnerText = "Computer Winner";
     } //Computer Condition
-    else if(humanChoice == 2 && computerChoice == 3){
+    else if(humanChoice == 'paper' && computerChoice == 'scissor'){
         computerScore++;
-        gameCount++;
         winnerText = "Computer Winner";
     }
-    else if(humanChoice == 3 && computerChoice == 1){
+    else if(humanChoice == 'scissor' && computerChoice == 'rock'){
         computerScore++;
-        gameCount++;
         winnerText = "Computer Winner";
     }
-    else if(humanChoice == 1 && computerChoice == 2){
+    else if(humanChoice == 'rock' && computerChoice == 'paper'){
         computerScore++;
-        gameCount++;
         winnerText = "Computer Winner";
     }
 
-    console.log("Human Score: " + humanScore);
-    console.log("Computer Score: " + computerScore);
-    console.log("Game Counts: " + gameCount)
+    // console.log("Human Score: " + humanScore);
+    // console.log("Computer Score: " + computerScore);
+    // console.log("Game Counts: " + gameCount)
 
-    //Paragraph DOM text
-    const winnerTxtDOM = document.querySelector('#winnerTxtDOM');
-    const gameCountDOM = document.querySelector('#gameCountDOM');
-    const humanScoreDOM = document.querySelector('#humanScoreDOM');
-    const computerScoreDOM = document.querySelector('#computerScoreDOM');
     //Winner text
-    winnerTxtDOM.textContent = `Winner: ${winnerText}`;
-    gameCountDOM.textContent = `Game Count: ${gameCount}`;
-    humanScoreDOM.textContent = `Winner: ${humanScore}`;
-    computerScoreDOM.textContent = `Winner: ${computerScore}`;
+    // winnerTxtDOM.textContent = `Winner: ${winnerText}`;
+    humanScoreDOM.textContent = `Human Score: ${humanScore}`;
+    computerScoreDOM.textContent = `Computer Score: ${computerScore}`;
+    checkFinished();
+}
+
+function checkFinished(){
+    if(humanScore == 5){
+        headerTxTDOM.textContent = "Human Winner";
+        allBtn.disabled = true;
+        resetButton();
+    }
+    if(computerScore == 5){
+        headerTxTDOM.textContent = "Computer Winner"
+        allBtn.disabled = true;
+        resetButton();
+    }
+}
+
+function resetButton(){
+    const rockBtn = document.querySelector("#rock-btn");
+    const paperBtn = document.querySelector("#paper-btn");
+    const scissorBtn = document.querySelector("#scissor-btn");
+    // allBtn.replaceChild(createResetBtn);
+    paperBtn.remove();
+    scissorBtn.remove();
+
+    const createResetBtn = document.createElement('button');
+    createResetBtn.textContent = "Play Again!";
+    createResetBtn.addEventListener("click", () =>{
+        humanScore = 0;
+        computerScore = 0;
+        
+    });
+    // allBtn.appendChild(createResetBtn);
+    allBtn.replaceChild(createResetBtn, rockBtn);
+    allBtn.replaceChild(createResetBtn, paperBtn);
+    allBtn.replaceChild(createResetBtn, scissorBtn);
 
 }
 
-//Display dom paragraph here
-//Text Dom
+//Create function here
+//Check if the human and computer score is equal to 5 then disabled the button
+//then temporary hide the button and make reset button
+//
+
+// const createResetBtn = document.createElement('button');
+//     createResetBtn.textContent = "Play Again!";
+//     allBtn.appendChild(createResetBtn);
+
+
+//Make new fuction 
