@@ -117,7 +117,7 @@ function resetButton(){
     const rockBtn = document.querySelector("#rock-btn");
     const paperBtn = document.querySelector("#paper-btn");
     const scissorBtn = document.querySelector("#scissor-btn");
-    // allBtn.replaceChild(createResetBtn);
+    rockBtn.remove();
     paperBtn.remove();
     scissorBtn.remove();
 
@@ -126,12 +126,12 @@ function resetButton(){
     createResetBtn.addEventListener("click", () =>{
         humanScore = 0;
         computerScore = 0;
-        
+        allBtn.appendChild(rockBtn);
+        allBtn.appendChild(paperBtn);
+        allBtn.appendChild(scissorBtn);
+        createResetBtn.remove();
     });
-    // allBtn.appendChild(createResetBtn);
-    allBtn.replaceChild(createResetBtn, rockBtn);
-    allBtn.replaceChild(createResetBtn, paperBtn);
-    allBtn.replaceChild(createResetBtn, scissorBtn);
+    allBtn.appendChild(createResetBtn);
 
 }
 
