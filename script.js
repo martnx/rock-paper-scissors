@@ -1,6 +1,5 @@
 let humanScore = 0;
 let computerScore = 0;
-let gameCount = 0;
 let gameFinished;
 
 let humanInput;
@@ -11,6 +10,7 @@ const mainContainer = document.querySelector('.main-container');
 
 //Paragraph DOM text
 const headerTxTDOM = document.querySelector('#rps-title');
+let originalHeader = headerTxTDOM.innerText;
 const winnerTxtDOM = document.querySelector('#winnerTxtDOM');
 const gameCountDOM = document.querySelector('#gameCountDOM');
 const humanScoreDOM = document.querySelector('#humanScoreDOM');
@@ -26,32 +26,41 @@ const computerScoreDOM = document.querySelector('#computerScoreDOM');
 // const scissorBtn = document.querySelector('#scissor-btn').addEventListener('click', () =>{
 //     console.log("Scissor Button");
 // });
+let bugTest = false;
 const allBtn = document.querySelector(".all-btn");
     allBtn.addEventListener("click", (e) =>{
     let target = e.target
     console.log(target);
+   
     switch(target.id){
         case "rock-btn": {
             humanInput = 'rock'; 
+            playRound();
         }; break;
         case "paper-btn": {
             humanInput = 'paper'; 
+            playRound();
         }; break;
         case "scissor-btn": {
             humanInput = 'scissor'; 
+            playRound();
         }; break;
         case "reset-btn": {
+            headerTxTDOM.innerText = originalHeader;
             humanScore = 0;
             computerScore = 0;
-        };
+            humanScoreDOM.textContent = `Human Score: ${humanScore}`;
+            computerScoreDOM.textContent = `Computer Score: ${computerScore}`;
+            break;
+        }
     }
-    playRound();
+    console.log("nothing");
 });
 
 //Get the computer input using Math random
 const getComputerInput = function(){
     const computerInput = Math.floor(Math.random()*3)+1;
-    let inputReturn
+    let inputReturn;
     
     switch(computerInput){
         case 1: inputReturn = 'rock'; break;
@@ -66,9 +75,10 @@ const playRound = function(){
     let computerChoice = getComputerInput();
     let headerTxt;
 
-    if(humanChoice == computerChoice){
+    if(humanChoice === computerChoice){
         headerTxt = 'TIE TIE TIE!!';
-    } //Human Condition
+    }
+    //Human Condition
     else if(humanChoice == 'rock' && computerChoice == 'scissor'){
         humanScore++;
         winnerText = "Human Winner";
@@ -139,10 +149,8 @@ function resetButton(){
 
     const createResetBtn = document.createElement('button');
     createResetBtn.textContent = "Play Again!";
-    createResetBtn.className = 'reset-btn';
+    createResetBtn.id = 'reset-btn';
     createResetBtn.addEventListener("click", () =>{
-        humanScore = 0;
-        computerScore = 0;
         createResetBtn.remove();
         rockBtn.style.display = '';
         paperBtn.style.display = '';
