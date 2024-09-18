@@ -26,10 +26,10 @@ const computerScoreDOM = document.querySelector('#computerScoreDOM');
 // const scissorBtn = document.querySelector('#scissor-btn').addEventListener('click', () =>{
 //     console.log("Scissor Button");
 // });
-
 const allBtn = document.querySelector(".all-btn");
     allBtn.addEventListener("click", (e) =>{
     let target = e.target
+    console.log(target);
     switch(target.id){
         case "rock-btn": {
             humanInput = 'rock'; 
@@ -40,6 +40,10 @@ const allBtn = document.querySelector(".all-btn");
         case "scissor-btn": {
             humanInput = 'scissor'; 
         }; break;
+        case "reset-btn": {
+            humanScore = 0;
+            computerScore = 0;
+        };
     }
     playRound();
 });
@@ -60,33 +64,40 @@ const getComputerInput = function(){
 const playRound = function(){
     let humanChoice = humanInput;
     let computerChoice = getComputerInput();
+    let headerTxt;
 
     if(humanChoice == computerChoice){
-        winnerText = "TIE!!"
+        headerTxt = 'TIE TIE TIE!!';
     } //Human Condition
     else if(humanChoice == 'rock' && computerChoice == 'scissor'){
         humanScore++;
         winnerText = "Human Winner";
+        headerTxt = "Human Win this round.";
     }
     else if(humanChoice == 'paper' && computerChoice == 'rock'){
         humanScore++;
         winnerText = "Human Winner";
+        headerTxt = "Human Win this round.";
     }
     else if(humanChoice == 'scissor' && computerChoice == 'paper'){
         humanScore++;
         winnerText = "Computer Winner";
+        headerTxt = "Computer Win this round.";
     } //Computer Condition
     else if(humanChoice == 'paper' && computerChoice == 'scissor'){
         computerScore++;
         winnerText = "Computer Winner";
+        headerTxt = "Computer Win this round.";
     }
     else if(humanChoice == 'scissor' && computerChoice == 'rock'){
         computerScore++;
         winnerText = "Computer Winner";
+        headerTxt = "Computer Win this round.";
     }
     else if(humanChoice == 'rock' && computerChoice == 'paper'){
         computerScore++;
         winnerText = "Computer Winner";
+        headerTxt = "Computer Win this round.";
     }
 
     // console.log("Human Score: " + humanScore);
@@ -95,6 +106,7 @@ const playRound = function(){
 
     //Winner text
     // winnerTxtDOM.textContent = `Winner: ${winnerText}`;
+    headerTxTDOM.textContent = headerTxt;
     humanScoreDOM.textContent = `Human Score: ${humanScore}`;
     computerScoreDOM.textContent = `Computer Score: ${computerScore}`;
     checkFinished();
@@ -121,19 +133,20 @@ function resetButton(){
     const rockBtn = document.querySelector("#rock-btn");
     const paperBtn = document.querySelector("#paper-btn");
     const scissorBtn = document.querySelector("#scissor-btn");
-    rockBtn.remove();
-    paperBtn.remove();
-    scissorBtn.remove();
+    rockBtn.style.display = 'none';
+    paperBtn.style.display = 'none';
+    scissorBtn.style.display = 'none';
 
     const createResetBtn = document.createElement('button');
     createResetBtn.textContent = "Play Again!";
+    createResetBtn.className = 'reset-btn';
     createResetBtn.addEventListener("click", () =>{
         humanScore = 0;
         computerScore = 0;
-        allBtn.appendChild(rockBtn);
-        allBtn.appendChild(paperBtn);
-        allBtn.appendChild(scissorBtn);
         createResetBtn.remove();
+        rockBtn.style.display = '';
+        paperBtn.style.display = '';
+        scissorBtn.style.display = '';
     });
     allBtn.appendChild(createResetBtn);
 
